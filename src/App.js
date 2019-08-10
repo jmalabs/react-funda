@@ -1,41 +1,38 @@
-import React, { Component } from 'react';
+import React, { Component, useState } from 'react';
 import logo from './logo.svg';
 import Person from './Person/Person'
 import './App.css';
 
-class App extends Component {
+const app = (props) => {
 
- personList = [{
-  name: 'John',
-  age: 28
-},
-{
-  name: 'Richard',
-  age: 28
-}
+ const personList = [{
+      name: 'John',
+      age: 28
+    },
+    {
+      name: 'Richard',
+      age: 28
+    }
+  ]
 
-]
-  state = {
-    persons: [...this.personList
+  var [personState, personSetState] = useState( {
+    persons: [...personList]
+  });
 
-    ]
-  }
-
-  swithNameHandler = () => {
-    this.personList[0].name = "bevs"
-    this.setState({persons: [...this.personList]})
+  const swithNameHandler = () => {
+    personList[0].name = "bevs"
+    personSetState({persons: [...personList]})
 
   }
-  render() {
+  
     return (
       <div className="App">
         <h1>Hi, React World!</h1>
-        <button onClick={this.swithNameHandler}>Switch Name</button>
-        <Person name={this.state.persons[0].name} age={this.state.persons[0].age}>My Hobbies: Racing</Person>
-        <Person name={this.state.persons[1].name} age={this.state.persons[1].age}>My Hobbies: ML</Person>
+        <button onClick={swithNameHandler}>Switch Name</button>
+        <Person name={personState.persons[0].name} age={personState.persons[0].age}>My Hobbies: Racing</Person>
+        <Person name={personState.persons[1].name} age={personState.persons[1].age}>My Hobbies: ML</Person>
       </div>
     );
-  }
 }
 
-export default App;
+export default app;
