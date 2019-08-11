@@ -1,12 +1,9 @@
 import React, { Component } from 'react';
-import logo from './logo.svg';
-import Person from './Person/Person'
-import './App.css';
-import UserInput from './UserInput/UserInput'
-import person from './Person/Person';
-import Validation from './Validation/Validation'
-import Char from './Char/Char'
-import { log } from 'util';
+import styles from './App.css';
+import UserInput from '../UserInput/UserInput'
+import Validation from '../Validation/Validation'
+import Char from '../Char/Char'
+import Persons from '../Components/Persons/Persons'
 
 class App extends Component {
   personList = [{
@@ -100,22 +97,33 @@ class App extends Component {
 
     console.log('this.state.showPersons' + this.state.showPersons)
     if (this.state.showPersons) {
-      persons = this.state.persons.map((person, index) => {
-        return (
-          <Person
-          click={() => this.deletePersonHandler(index)}
-          name={person.name}
-          age={person.age}
-          key = {person.id}
-          changed={(event) => this.newNameHandler(event, person.id)} />
-        )
+      // persons = this.state.persons.map((person, index) => {
+      //   return (
+      //     <Person
+      //     click={() => this.deletePersonHandler(index)}
+      //     name={person.name}
+      //     age={person.age}
+      //     key = {person.id}
+      //     changed={(event) => this.newNameHandler(event, person.id)} />
+      //   )
      
-      });
+      // });
+
+      persons = (
+        <div>
+          <Persons
+          persons = {this.state.persons}
+          clicked ={this.deletePersonHandler}
+          changed = {this.newNameHandler}
+          />
+        </div>
+      )
     }
     
+    console.log((persons));
   
     return (
-      <div className="App">
+      <div className={styles.App}>
         <h1>Hi, React World!</h1>
         <button style={style} onClick={this.togglePersons}>Toggle Persons</button>
         <UserInput></UserInput>
