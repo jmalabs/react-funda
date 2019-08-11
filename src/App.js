@@ -59,6 +59,7 @@ class App extends Component {
   }
 
   togglePersons = () => {
+    console.log(this.state.showPersons)
     this.setState({ showPersons: !this.state.showPersons });
   }
 
@@ -87,6 +88,17 @@ class App extends Component {
       />)
     })]
 
+    const style = {
+      backgroundColor: 'blue',
+      color: 'white',
+      fontWeight: '600',
+      padding: '10px',
+      boxShadow: '1px 2px 3px #ccc',
+      borderRadius: '2px',
+      cursor: 'pointer'
+    }
+
+    console.log('this.state.showPersons' + this.state.showPersons)
     if (this.state.showPersons) {
       persons = this.state.persons.map((person, index) => {
         return (
@@ -97,18 +109,11 @@ class App extends Component {
           key = {person.id}
           changed={(event) => this.newNameHandler(event, person.id)} />
         )
-
+     
       });
     }
-    const style = {
-      backgroundColor: 'blue',
-      color: 'white',
-      fontWeight: '600',
-      padding: '10px',
-      boxShadow: '1px 2px 3px #ccc',
-      borderRadius: '2px',
-      cursor: 'pointer'
-    }
+    
+  
     return (
       <div className="App">
         <h1>Hi, React World!</h1>
@@ -116,6 +121,7 @@ class App extends Component {
         <UserInput></UserInput>
         <input type="text" onChange={this.inputChangeHandler} value={this.state.userInput}></input>
         <Validation inputLength ={this.state.userInput.length}></Validation>
+        {persons}
         {charList}
 
       </div>
